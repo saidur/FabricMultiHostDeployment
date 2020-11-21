@@ -59,7 +59,7 @@ presetup() {
 
 CHANNEL_NAME="mychannel"
 CC_RUNTIME_LANGUAGE="node"
-VERSION="1"
+VERSION="2"
 CC_SRC_PATH="./../../artifacts/src/github.com/fabcar/javascript"
 CC_NAME="fabcar"
 
@@ -71,7 +71,7 @@ packageChaincode() {
         --label ${CC_NAME}_${VERSION}
     echo "===================== Chaincode is packaged on peer0.org1 ===================== "
 }
-#packageChaincode
+packageChaincode
 
 installChaincode() {
     setGlobalsForPeer0Org1
@@ -91,7 +91,7 @@ queryInstalled() {
     echo "===================== Query installed successful on peer0.org1 on channel ===================== "
 }
 
- #queryInstalled
+# queryInstalled
 
 approveForMyOrg1() {
     setGlobalsForPeer0Org1
@@ -108,8 +108,8 @@ approveForMyOrg1() {
 
 }
 
- #queryInstalled
- #approveForMyOrg1
+# queryInstalled
+# approveForMyOrg1
 
 checkCommitReadyness() {
     setGlobalsForPeer0Org1
@@ -119,7 +119,7 @@ checkCommitReadyness() {
     echo "===================== checking commit readyness from org 1 ===================== "
 }
 
- checkCommitReadyness
+# checkCommitReadyness
 
 commitChaincodeDefination() {
     setGlobalsForPeer0Org1
@@ -189,8 +189,9 @@ chaincodeQuery() {
     setGlobalsForPeer0Org1
 
     # Query Car by Id
-    peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function": "queryCar","Args":["CAR0"]}'
- 
+    # peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function": "queryCar","Args":["CAR0"]}'
+    peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function": "queryMarks","Args":["6666"]}'
+
 }
 
 # chaincodeQuery

@@ -53,8 +53,14 @@ const getAffiliation = async (org) => {
 }
 
 const getRegisteredUser = async (username, userOrg, isJson) => {
-    let ccp = await getCCP(userOrg)
-
+    
+    
+    console.log(`username path: ` + username);
+    let ccp = await getCCP(userOrg);
+    console.log (userOrg);
+    logger.debug('ccp' + ccp);
+    console.log ('ccp ' + ccp);
+    
     const caURL = await getCaUrl(userOrg, ccp)
     const ca = new FabricCAServices(caURL);
 

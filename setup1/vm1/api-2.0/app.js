@@ -15,7 +15,6 @@ const constants = require('./config/constants.json')
 const host = process.env.HOST || constants.host;
 const port = process.env.PORT || constants.port;
 
-
 const helper = require('./app/helper')
 const invoke = require('./app/invoke')
 const qscc = require('./app/qscc')
@@ -77,21 +76,42 @@ function getErrorMessage(field) {
     return response;
 }
 
+app.post('/test', async function (req, res) {
+
+    var response = {
+        success: true,
+        message: ' test script'
+    };
+    
+    logger.debug('Successfully test');
+    res.json({ success: true, message: response });
+
+
+})
+
 // Register and enroll user
 app.post('/users', async function (req, res) {
     var username = req.body.username;
     var orgName = req.body.orgName;
+    username = 'saidur';
+    orgName = 'Org1';
+
     logger.debug('End point : /users');
     logger.debug('User name : ' + username);
     logger.debug('Org name  : ' + orgName);
     if (!username) {
+        logger.debug('username error');
         res.json(getErrorMessage('\'username\''));
         return;
     }
     if (!orgName) {
+        logger.debug('orgname error');
         res.json(getErrorMessage('\'orgName\''));
         return;
     }
+
+   
+    logger.debug('token genrate call... ');
 
     var token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + parseInt(constants.jwt_expiretime),
@@ -99,8 +119,9 @@ app.post('/users', async function (req, res) {
         orgName: orgName
     }, app.get('secret'));
 
-    let response = await helper.getRegisteredUser(username, orgName, true);
+    logger.debug('Token is   : ' + token);
 
+    let response = await helper.getRegisteredUser(username, orgName, true);
     logger.debug('-- returned from registering the username %s for organization %s', username, orgName);
     if (response && typeof response !== 'string') {
         logger.debug('Successfully registered the username %s for organization %s', username, orgName);

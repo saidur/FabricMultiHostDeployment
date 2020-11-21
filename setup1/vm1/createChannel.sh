@@ -50,10 +50,10 @@ updateAnchorPeers(){
     
 }
 
- updateAnchorPeers
+# updateAnchorPeers
 
 # removeOldCrypto
 
-#createChannel
+createChannel
 #joinChannel
 #updateAnchorPeers
